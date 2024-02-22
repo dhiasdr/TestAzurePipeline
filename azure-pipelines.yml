@@ -1,3 +1,11 @@
+trigger:
+- '*'
+
+pr:
+- '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
 steps:
 - task: JavaToolInstaller@0
   inputs:
