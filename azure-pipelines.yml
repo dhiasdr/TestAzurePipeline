@@ -18,8 +18,8 @@ steps:
     SonarCloud: 'API-EpayNexus' # Replace with the name of your SonarCloud service connection
     organization: 'EpayNexus'
     scannerMode: 'MSBuild'
-  	projectKey: 'dhiasdiri17_EpayNexus-Aventix-API'
-	  projectName: 'EpayNexus-Aventix-API'
+    projectKey: 'dhiasdiri17_EpayNexus-Aventix-API'
+    projectName: 'EpayNexus-Aventix-API'
 
 - script: 'mvn sonar:sonar'
   displayName: 'Run SonarCloud Analysis'
