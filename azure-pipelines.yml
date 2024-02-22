@@ -1,34 +1,19 @@
-trigger:
-- '*'
-
-pool:
-  vmImage: 'ubuntu-latest'
-
 steps:
-- task: UseJavaVersion@1
+- task: JavaToolInstaller@0
   inputs:
-    versionSpec: '17'
-    addToPath: true
-
-- script: 'mvn clean install'
+    versionSpec: '17' # Specify the JDK version you want, in this case, Java 8.
+    jdkArchitectureOption: 'x64' # You can choose 'x64' or 'x86' based on your architecture.
+    jdkSourceOption: 'PreInstalled' # Use 'PreInstalled' if the JDK is pre-installed on the build agent.
+    
+- script: |
+    java -version
+    mvn clean install -DskipTests
   displayName: 'Maven Clean Install'
-
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: 'API-EpayNexus' # Replace with the name of your SonarCloud service connection
-    organization: 'EpayNexus'
-    scannerMode: 'MSBuild'
-    projectKey: 'dhiasdiri17_EpayNexus-Aventix-API'
-    projectName: 'EpayNexus-Aventix-API'
-
-- script: 'mvn sonar:sonar'
-  displayName: 'Run SonarCloud Analysis'
-
-- task: SonarCloudPublish@1
-
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'deploy'
-    options: '-X'
-  condition: succeededOrFailed()
+    SonarCloud: 'API-EpayNexus'
+    organization: 'epaynexus'
+    scannerMode: 'Other'
+    extraProperties: |
+      sonar.projectKey=dhiasdiri17_EpayNexus-Aventix-API
+      sonar.projectName=EpayNexus-Aventix-API
