@@ -8,4 +8,5 @@ public record DemandeCreationCompteRequest(String nom, String prenom, String tel
 		String nomEntreprise, String raisonSociale, String numSiret, String codePostal, String adresse, int effectif,
 		DemandeurEnum demandeur) {
 
+
 }
