@@ -1,11 +1,46 @@
-steps:
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '17' # Specify the JDK version you want, in this case, Java 8.
-    jdkArchitectureOption: 'x64' # You can choose 'x64' or 'x86' based on your architecture.
-    jdkSourceOption: 'PreInstalled' # Use 'PreInstalled' if the JDK is pre-installed on the build agent.
-    
-- script: |
-    java -version
-    mvn clean install -DskipTests
-  displayName: 'Maven Clean Install'
+trigger:
+- '*'
+
+pr:
+- '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: Build
+  steps:
+  - script: echo "Build started"
+
+  - task: UseJavaVersion@1
+    inputs:
+      versionSpec: '17'
+      addToPath: true
+
+  - script: |
+      mvn clean install
+    displayName: 'Maven Clean Install'
+
+  - script: echo "Build completed"
+
+- job: NotifyByEmail
+  dependsOn: Build
+  condition: succeededOrFailed()
+  steps:
+  - task: Email@1
+    inputs:
+      To: 'dhiasdiri17@gmail.com'
+      Subject: 'Azure Pipelines Build Status'
+      Body: |
+        Dear ${commitAuthor},
+        
+        The Azure Pipelines build for commit ${commitSha} on branch ${buildSourceBranch} has completed with status: ${buildStatus}.
+        
+        Thank you,
+        Your CI/CD Bot
+      SendOnBehalfOf: 'dhiasdiri17@hotmail.com'
+    env:
+      commitAuthor: $(Build.SourceVersionAuthor)
+      commitSha: $(Build.SourceVersion)
+      buildSourceBranch: $(Build.SourceBranch)
+      buildStatus: $(Build.Result)
