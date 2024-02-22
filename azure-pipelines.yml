@@ -1,18 +1,10 @@
-trigger:
-- '*'
-
-pr:
-- '*'
-
-pool:
-  vmImage: 'ubuntu-latest'
-
 steps:
-- task: UseJavaVersion@1
+- task: JavaToolInstaller@0
   inputs:
-    versionSpec: '17'
-    addToPath: true
-
+    versionSpec: '17' # Specify the JDK version you want, in this case, Java 8.
+    jdkArchitectureOption: 'x64' # You can choose 'x64' or 'x86' based on your architecture.
+    jdkSourceOption: 'PreInstalled' # Use 'PreInstalled' if the JDK is pre-installed on the build agent.
+    
 - script: |
     java -version
     mvn clean install
