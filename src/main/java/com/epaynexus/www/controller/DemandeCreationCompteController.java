@@ -24,5 +24,6 @@ public class DemandeCreationCompteController {
 		demandeCreationCompteService.creerDemande(demaCreationCompteRequest);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Demande créée avec succès");
 		
+		
 	}
 }
