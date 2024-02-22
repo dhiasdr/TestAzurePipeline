@@ -20,4 +20,4 @@ steps:
 
 - script: 'mvn sonar:sonar'
   displayName: 'Run SonarCloud Analysis'
-- task: SonarCloudPublish@1
+#- task: SonarCloudPublish@1
