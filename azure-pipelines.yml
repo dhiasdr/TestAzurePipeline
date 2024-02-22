@@ -14,5 +14,6 @@ steps:
     addToPath: true
 
 - script: |
+    java -version
     mvn clean install
   displayName: 'Maven Clean Install'
