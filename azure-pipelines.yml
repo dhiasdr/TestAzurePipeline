@@ -25,8 +25,7 @@ steps:
     extraProperties: |
       sonar.projectKey=dhiasdiri17_EpayNexus-Aventix-API
       sonar.projectName=EpayNexus-Aventix-API
-      sonar.branch.name=refs/pull/$(System.PullRequest.PullRequestId)/merge
-
+      
 - script: 'mvn sonar:sonar'
   displayName: 'Run SonarCloud Analysis'
 - task: SonarCloudPublish@1
