@@ -1,46 +1,34 @@
 trigger:
 - '*'
 
-pr:
-- '*'
-
 pool:
   vmImage: 'ubuntu-latest'
 
-jobs:
-- job: Build
-  steps:
-  - script: echo "Build started"
+steps:
+- task: UseJavaVersion@1
+  inputs:
+    versionSpec: '17'
+    addToPath: true
 
-  - task: UseJavaVersion@1
-    inputs:
-      versionSpec: '17'
-      addToPath: true
+- script: 'mvn clean install'
+  displayName: 'Maven Clean Install'
 
-  - script: |
-      mvn clean install
-    displayName: 'Maven Clean Install'
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'API-EpayNexus' # Replace with the name of your SonarCloud service connection
+    organization: 'EpayNexus'
+    scannerMode: 'MSBuild'
+	projectKey=dhiasdiri17_EpayNexus-Aventix-API
+	projectName=EpayNexus-Aventix-API
 
-  - script: echo "Build completed"
+- script: 'mvn sonar:sonar'
+  displayName: 'Run SonarCloud Analysis'
 
-- job: NotifyByEmail
-  dependsOn: Build
+- task: SonarCloudPublish@1
+
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'deploy'
+    options: '-X'
   condition: succeededOrFailed()
-  steps:
-  - task: Email@1
-    inputs:
-      To: 'dhiasdiri17@gmail.com'
-      Subject: 'Azure Pipelines Build Status'
-      Body: |
-        Dear ${commitAuthor},
-        
-        The Azure Pipelines build for commit ${commitSha} on branch ${buildSourceBranch} has completed with status: ${buildStatus}.
-        
-        Thank you,
-        Your CI/CD Bot
-      SendOnBehalfOf: 'dhiasdiri17@hotmail.com'
-    env:
-      commitAuthor: $(Build.SourceVersionAuthor)
-      commitSha: $(Build.SourceVersion)
-      buildSourceBranch: $(Build.SourceBranch)
-      buildStatus: $(Build.Result)
