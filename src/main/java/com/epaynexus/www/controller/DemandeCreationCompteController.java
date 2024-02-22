@@ -23,5 +23,6 @@ public class DemandeCreationCompteController {
 	public ResponseEntity creerDemande(@RequestBody DemandeCreationCompteRequest demaCreationCompteRequest) {
 		demandeCreationCompteService.creerDemande(demaCreationCompteRequest);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Demande créée avec succès");
+		
 	}
 }
