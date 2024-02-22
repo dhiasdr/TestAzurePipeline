@@ -15,8 +15,9 @@ steps:
     organization: 'epaynexus'
     scannerMode: 'Other'
     extraProperties: |
-      sonar.projectKey=dhiasdiri17_EpayNexus-Aventix-API
+      sonar.projectKey='$(Build.Repository.Name)_$(Build.SourceBranchName)'
       sonar.projectName=EpayNexus-Aventix-API
 
 - script: 'mvn sonar:sonar'
   displayName: 'Run SonarCloud Analysis'
+- task: SonarCloudPublish@1
