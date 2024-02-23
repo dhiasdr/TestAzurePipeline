@@ -20,7 +20,7 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'EpayNexusAPIServiceConnection'
-    organization: 'epaynexusapi'
+    organization: 'EpayNexusAPI'
     scannerMode: 'Other'
     extraProperties: |
       sonar.projectKey=dhiasdr_TestAzurePipeline
