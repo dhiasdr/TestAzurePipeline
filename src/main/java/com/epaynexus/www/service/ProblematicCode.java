@@ -22,5 +22,6 @@ public class ProblematicCode {
     // Unused method
     private void unusedMethod() {
         System.out.println("This method is not used.");
+		
     }
 }
