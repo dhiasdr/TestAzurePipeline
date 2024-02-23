@@ -19,12 +19,12 @@ steps:
   displayName: 'Maven Clean Install'
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: 'API-EpayNexus'
-    organization: 'epaynexus'
+    SonarCloud: 'EpayNexusAPIServiceConnection'
+    organization: 'epaynexusapi'
     scannerMode: 'Other'
     extraProperties: |
-      sonar.projectKey=dhiasdiri17_EpayNexus-Aventix-API
-      sonar.projectName=EpayNexus-Aventix-API
+      sonar.projectKey=dhiasdr_TestAzurePipeline
+      sonar.projectName=TestAzurePipeline
       
 - script: 'mvn sonar:sonar'
   displayName: 'Run SonarCloud Analysis'
