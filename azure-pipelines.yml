@@ -29,3 +29,4 @@ steps:
 - script: echo "SonarQube analysis will be triggered automatically by SonarCloudPrepare"
   displayName: 'SonarQube Analysis'
 - task: SonarCloudPublish@1
+  dependsOn: SonarCloudPrepare
