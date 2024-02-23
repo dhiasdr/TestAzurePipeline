@@ -28,7 +28,4 @@ steps:
       sonar.analysis.mode=preview
 - script: echo "SonarQube analysis will be triggered automatically by SonarCloudPrepare"
   displayName: 'SonarQube Analysis'
-
 - task: SonarCloudPublish@1
-  condition: and(succeeded(), eq(variables['Agent.JobStatus'], 'Succeeded'))
-  displayName: 'SonarCloud Publish'
