@@ -13,10 +13,6 @@ steps:
     jdkArchitectureOption: 'x64' # You can choose 'x64' or 'x86' based on your architecture.
     jdkSourceOption: 'PreInstalled' # Use 'PreInstalled' if the JDK is pre-installed on the build agent.
     
-- script: |
-    java -version
-    mvn clean install -DskipTests
-  displayName: 'Maven Clean Install'
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'EpayNexusAPIServiceConnection'
@@ -26,6 +22,8 @@ steps:
       sonar.projectKey=dhiasdr_TestAzurePipeline
       sonar.projectName=TestAzurePipeline
       
-- script: echo "SonarQube analysis will be triggered automatically by SonarCloudPrepare"
-  displayName: 'SonarQube Analysis'
+- script: |
+    java -version
+    mvn clean install -DskipTests sonar:sonar
+  displayName: 'Maven Clean Install'
 - task: SonarCloudPublish@1
