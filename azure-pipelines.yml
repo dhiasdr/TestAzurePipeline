@@ -25,7 +25,7 @@ steps:
     extraProperties: |
       sonar.projectKey=dhiasdr_TestAzurePipeline
       sonar.projectName=TestAzurePipeline
-      
+      sonar.analysis.mode=preview
 - script: echo "SonarQube analysis will be triggered automatically by SonarCloudPrepare"
   displayName: 'SonarQube Analysis'
 - task: SonarCloudPublish@1
