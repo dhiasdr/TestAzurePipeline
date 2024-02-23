@@ -26,6 +26,6 @@ steps:
       sonar.projectKey=dhiasdr_TestAzurePipeline
       sonar.projectName=TestAzurePipeline
       
-- script: 'mvn sonar:sonar'
-  displayName: 'Run SonarCloud Analysis'
+- script: echo "SonarQube analysis will be triggered automatically by SonarCloudPrepare"
+  displayName: 'SonarQube Analysis'
 - task: SonarCloudPublish@1
