@@ -28,4 +28,8 @@ steps:
       sonar.analysis.mode=preview
 - script: echo "SonarQube analysis will be triggered automatically by SonarCloudPrepare"
   displayName: 'SonarQube Analysis'
+  
+- script: |
+    mvn sonar:sonar
+  displayName: 'Manual SonarCloud Analysis'
 - task: SonarCloudPublish@1
